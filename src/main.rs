@@ -1,6 +1,6 @@
-use opencv::prelude::*;
-use opencv::imgcodecs;
 use opencv::highgui;
+use opencv::imgcodecs;
+use opencv::prelude::*;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 加载图像
@@ -11,18 +11,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 return Err("Failed to load image - image is empty".into());
             }
             img
-        },
-        Err(e) => return Err(format!("Failed to load image: {:?}", e).into())
+        }
+        Err(e) => return Err(format!("Failed to load image: {:?}", e).into()),
     };
 
     // 打印图像信息
     println!("Image dimensions: {}x{}", img.cols(), img.rows());
-    
+
     // 显示图像
     if let Err(e) = highgui::imshow("window", &img) {
         return Err(format!("Failed to display image: {:?}", e).into());
     }
-    
+
     highgui::wait_key(0)?;
     Ok(())
 }
